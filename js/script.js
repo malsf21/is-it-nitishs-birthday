@@ -10,8 +10,10 @@ function checkBirthday(name){
     music.loop = true;
     music.currentTime = 10;
     music.play();
+    $('#container').addClass("bg-yes");
   }
   else{
     $('#message').html("Nope, it isn't " + name + "'s Birthday today.");
+    $('#container').addClass("bg-no");
   }
 }
