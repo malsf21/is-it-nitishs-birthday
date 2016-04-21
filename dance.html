@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://matias.ma/nsfw/ -->
+<html style="background-color: rgb(43, 211, 43);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Konga!</title>
+
+<meta name="viewport" content="width=device-width">
+<style type="text/css">article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}html,body{margin:0px;padding:0px;}html{background-color:#000;}body{padding:0px;margin:0px;opacity:0.0;display:block;overflow:hidden;position:absolute;height:auto;bottom:20px;top:20px;left:20px;right:20px;background-color:#9f9f9f;-webkit-transition:opacity 1.5s ease-in;-moz-transition:opacity 1.5s ease-in;-o-transition:opacity 1.5s ease-in;-ms-transition:opacity 1.5s ease-in;border-radius:10px;cursor:wait;}.roll{opacity:1.0;cursor:default;}figure.ditto{position:absolute;display:block;padding:0px;margin:0px;width:499px;height:439px;background-image:url(resources/ohyes.png);background-repeat:no-repeat;}figure.ditto.hero{z-index:0;position:absolute;left:50%;margin-left:-255px;top:50%;margin-top:-220px;}figure.fromLeft{-webkit-animation:fromLeft 3s linear;-moz-animation:fromLeft 3s linear;-ms-animation:fromLeft 3s linear;left:-100%;}figure.fromRight{-webkit-animation:fromRight 3s linear;-moz-animation:fromRight 3s linear;-ms-animation:fromRight 3s linear;right:-100%;}@-webkit-keyframes fromLeft{0%{left:-100%;}100%{left:100%;}}@-moz-keyframes fromLeft{0%{left:-100%;}100%{left:100%;}}@-ms-keyframes fromLeft{0%{left:-100%;}100%{left:100%;}}@-webkit-keyframes fromRight{0%{right:-100%;}100%{right:100%;}}@-moz-keyframes fromRight{0%{right:-100%;}100%{right:100%;}}@-ms-keyframes fromRight{0%{right:-100%;}100%{right:100%;}}@-webkit-keyframes appear{0%{opacity:0;}100%{opacity:1;}}@-moz-keyframes appear{0%{opacity:0;}100%{opacity:1;}}@-ms-keyframes appear{0%{opacity:0;}100%{opacity:1;}}figure.spinner{display:block!important;opacity:1.0!important;position:absolute;top:100px;bottom:100px;left:0px;right:0px;z-index:1337;}</style>
+
+
+        </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/spin.min.js"></script><style></style>
+<script type="text/javascript">
+			/*
+				Matías Martínez, (cc) 2012
+			*/
+
+
+			$(document).ready(function() {
+		  		var r = $("html");
+		  		var b = $("body");
+		  		var c = $("section#dancefloor");
+		  		var spawnRate = 100;
+		  		var deallocDelay = 3000;
+		  		var danceDelay = 1000;
+
+		  		function newDitto() {
+		  			var scale =  "scale("+dice(0.1, 5.0)+")";
+		  			var fromLeft = diceInt(0,1);
+		  			var originY = dice(-10, 100) + "%";
+		  			var opacity = dice(0.1, 1.0);
+		  			var index = dice(-30, 10);
+		  			var duration = dice(0.5, 3) + "s";
+
+		  			var d = $('<figure/>').css({
+		  				top: originY,
+		  				opacity: opacity,
+		  				"z-index": index,
+		  				"-webkit-transform": scale,
+		  				"-moz-transform": scale,
+		  				"-o-transform": scale,
+		  				"-webkit-animation-duration": duration,
+		  				"-moz-animation-duration": duration,
+		  				"-ms-animation-duration": duration
+					});
+
+					r.css({
+						"background-color": color()
+					});
+
+					b.css({
+						"background-color": color()
+					});
+
+					d.addClass("ditto");
+					d.addClass( (fromLeft) ? "fromLeft" : "fromRight");
+					d.appendTo(c);
+
+					setTimeout(function() {
+						d.remove();
+					}, deallocDelay);
+
+		  		}
+
+		  		document.getElementById("song").addEventListener("canplaythrough", kongatime, false);
+
+				function kongatime()
+				{
+					// Let's roll
+					document.title = "Konga!";
+					b.addClass("roll");
+
+					// Delete spinner
+					$("figure#spinner").fadeOut(200)
+					setTimeout(function() {
+						$("figure#spinner").remove();
+					}, 202);
+
+					// Loop
+					setTimeout(function() {
+						setInterval(function() {
+		  					newDitto();
+		  				}, spawnRate);
+		  			}, danceDelay);
+
+				}
+
+				// Dirty isn't it?
+		  		var opts = {
+		  			lines: 13, // The number of lines to draw
+		  			length: 7, // The length of each line
+		  			width: 4, // The line thickness
+		  			radius: 10, // The radius of the inner circle
+		  			rotate: 0, // The rotation offset
+		  			color: '#fff', // #rgb or #rrggbb
+		  			speed: 1, // Rounds per second
+		  			trail: 60, // Afterglow percentage
+		  			shadow: true, // Whether to render a shadow
+		  			hwaccel: false, // Whether to use hardware acceleration
+		  			className: 'spinner', // The CSS class to assign to the spinner
+		  			zIndex: 2e9, // The z-index (defaults to 2000000000)
+		  			top: 'auto', // Top position relative to parent in px
+		  			left: 'auto' // Left position relative to parent in px
+
+
+		  		};
+
+		  	console.log("spin control");
+		  	var spin = $('<figure/>').attr({
+		  				id: "spinner"
+					});
+		  	$("html").append(spin);
+
+		  	var target = document.getElementById('spinner');
+		  	var spinner = new Spinner(opts).spin(target);
+
+
+			});
+
+			function dice(min, max) {
+    			return Math.random() * (max - min) + min;
+			}
+
+			function diceInt(min, max) {
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			function color() {
+		  		return '#'+Math.floor(Math.random()*16777215).toString(16);
+		  	}
+
+		</script>
+<script type="text/javascript">
+		clicksor_enable_adhere = false;
+
+		clicksor_default_url = '';
+		clicksor_banner_border = '#99CC33';
+		clicksor_banner_ad_bg = '#FFFFFF';
+		clicksor_banner_link_color = '#000000';
+		clicksor_banner_text_color = '#666666';
+		clicksor_layer_border_color = '';
+		clicksor_layer_ad_bg = '';
+		clicksor_layer_ad_link_color = '';
+		clicksor_layer_ad_text_color = '';
+		clicksor_text_link_bg = '';
+		clicksor_text_link_color = '';
+		clicksor_enable_text_link = false;
+
+		clicksor_banner_text_banner = true;
+		clicksor_banner_image_banner = true;
+		clicksor_enable_layer_pop = false;
+		clicksor_enable_pop = true;
+		</script>
+</head>
+<body class="roll" style="background-color: rgb(69, 139, 210);">
+<section id="dancefloor">
+<figure class="ditto hero"></figure>
+<figure class="ditto fromLeft" style="top: 27.6526%; opacity: 0.99183; transform: scale(0.345691); animation-duration: 2.08183s;"></figure><figure class="ditto fromRight" style="top: 66.6723%; opacity: 0.446552; transform: scale(1.27007); animation-duration: 0.502418s;"></figure><figure class="ditto fromRight" style="top: 73.4502%; opacity: 0.417088; transform: scale(0.649795); animation-duration: 1.65383s;"></figure><figure class="ditto fromLeft" style="top: 28.4179%; opacity: 0.641419; transform: scale(1.40013); animation-duration: 2.00326s;"></figure><figure class="ditto fromLeft" style="top: 45.201%; opacity: 0.974904; transform: scale(0.869844); animation-duration: 2.84589s;"></figure><figure class="ditto fromRight" style="top: 63.489%; opacity: 0.402604; transform: scale(1.17503); animation-duration: 2.70989s;"></figure><figure class="ditto fromRight" style="top: 44.703%; opacity: 0.871305; transform: scale(0.997411); animation-duration: 2.19138s;"></figure><figure class="ditto fromRight" style="top: 54.2763%; opacity: 0.730896; transform: scale(1.28405); animation-duration: 1.64031s;"></figure></section>
+<audio id="song" autoplay="" loop="">
+<source src="resources/september.mp3" type="audio/mp3">
+<embed src="resources/september.mp3" loop="true">
+</audio>
+
+
+</body></html>
